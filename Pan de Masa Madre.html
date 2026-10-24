@@ -1,0 +1,199 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Pan de Masa Madre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: una columna de receta, con una calculadora de porcentajes de panadero como pieza central */
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --fg: #23211c;
+    --muted: #6b665b;
+    --line: #e2ddd1;
+    --accent: #8a5a1f;
+    --accent-soft: #f1e6d4;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #181714; --surface: #211f1b; --fg: #ece8df; --muted: #a39d90;
+      --line: #36322b; --accent: #d9a35a; --accent-soft: #2e2618; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #181714; --surface: #211f1b; --fg: #ece8df; --muted: #a39d90;
+    --line: #36322b; --accent: #d9a35a; --accent-soft: #2e2618; color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding-block: 3rem 4rem;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid;
+    gap: 2.5rem;
+  }
+  header { display: grid; gap: .75rem; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 700; }
+  h2 { font-size: 1.4rem; font-weight: 500; }
+  p { margin: 0; max-width: 65ch; }
+  .lede { color: var(--muted); font-size: 1.125rem; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; font-size: .9375rem; color: var(--muted); }
+  .facts b { color: var(--fg); font-weight: 600; }
+
+  section { display: grid; gap: 1rem; }
+
+  /* Calculadora */
+  .calc {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .controls { display: flex; flex-wrap: wrap; gap: 1rem 2rem; }
+  .field { display: grid; gap: .35rem; min-width: 0; flex: 1 1 12rem; }
+  .field label { font-size: .875rem; font-weight: 600; }
+  .field output { font-family: var(--font-mono); color: var(--accent); }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid var(--line); }
+  th { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td.num, th.num { text-align: right; font-family: var(--font-mono); }
+  tfoot td { font-weight: 600; border-bottom: none; }
+
+  ol.steps { margin: 0; padding-left: 1.4rem; display: grid; gap: .9rem; }
+  ol.steps li::marker { font-family: var(--font-mono); color: var(--accent); }
+  .time {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .8125rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0 .45rem;
+    border-radius: 4px;
+    margin-left: .35rem;
+  }
+
+  .note {
+    border-left: 3px solid var(--accent);
+    padding: .25rem 0 .25rem 1rem;
+    color: var(--muted);
+    font-size: .9375rem;
+  }
+  footer { font-size: .8125rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+
+<main class="page">
+  <header>
+    <span class="eyebrow">Página de ejemplo · Receta</span>
+    <h1>Pan de masa madre de campo</h1>
+    <p class="lede">Una hogaza de corteza crujiente y miga abierta, con un 10&nbsp;% de harina integral. Ajusta la cantidad y la hidratación y la tabla recalcula los gramos.</p>
+    <div class="facts">
+      <span><b>Tiempo total:</b> 24 h</span>
+      <span><b>Trabajo activo:</b> 45 min</span>
+      <span><b>Horno:</b> 250&nbsp;°C → 230&nbsp;°C</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="calc-title">
+    <h2 id="calc-title">Ingredientes en porcentaje de panadero</h2>
+    <div class="calc">
+      <div class="controls">
+        <div class="field">
+          <label for="flour">Harina total <output id="flour-out" for="flour">500 g</output></label>
+          <input type="range" id="flour" min="250" max="1500" step="50" value="500">
+        </div>
+        <div class="field">
+          <label for="hydration">Hidratación <output id="hyd-out" for="hydration">75 %</output></label>
+          <input type="range" id="hydration" min="60" max="90" step="1" value="75">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Ingrediente</th><th class="num">%</th><th class="num">Gramos</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+          <tfoot>
+            <tr><td>Masa total</td><td class="num"></td><td class="num" id="total"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <p class="note">En el porcentaje de panadero la harina siempre vale 100&nbsp;% y cada ingrediente se expresa respecto a ella. La masa madre se considera al 100&nbsp;% de hidratación.</p>
+  </section>
+
+  <section aria-labelledby="steps-title">
+    <h2 id="steps-title">Elaboración</h2>
+    <ol class="steps">
+      <li>Refresca la masa madre y espera a que duplique su volumen.<span class="time">4–6 h</span></li>
+      <li>Mezcla la harina con el agua (reserva 25&nbsp;g) y deja en autólisis.<span class="time">45 min</span></li>
+      <li>Añade la masa madre, la sal y el agua reservada. Amasa hasta integrar.<span class="time">5 min</span></li>
+      <li>Haz 4 series de pliegues cada 30 minutos durante la fermentación en bloque a 24–26&nbsp;°C.<span class="time">4 h</span></li>
+      <li>Preforma, deja reposar y forma la hogaza. Colócala en un banetón enharinado.<span class="time">30 min</span></li>
+      <li>Retarda en la nevera a 4&nbsp;°C.<span class="time">12–16 h</span></li>
+      <li>Hornea en olla de hierro tapada 20 minutos a 250&nbsp;°C, destapa y sigue 25 minutos a 230&nbsp;°C, hasta que el interior marque 96–98&nbsp;°C.<span class="time">45 min</span></li>
+    </ol>
+  </section>
+
+  <footer>Archivo HTML de ejemplo: tipografía, tokens de color para modo claro y oscuro, una tabla responsive y un poco de JavaScript.</footer>
+</main>
+
+<script>
+  const flour = document.getElementById("flour");
+  const hydration = document.getElementById("hydration");
+  const rows = document.getElementById("rows");
+  const total = document.getElementById("total");
+
+  function render() {
+    const f = Number(flour.value);
+    const h = Number(hydration.value);
+    // Masa madre al 20 % y al 100 % de hidratación: aporta harina y agua a partes iguales
+    const starterPct = 20;
+    const starterFlour = f * starterPct / 100 / 2;
+    const items = [
+      ["Harina de fuerza", 90, f * 0.9],
+      ["Harina integral", 10, f * 0.1],
+      ["Agua", h, f * h / 100 - starterFlour],
+      ["Masa madre", starterPct, f * starterPct / 100],
+      ["Sal", 2, f * 0.02],
+    ];
+    rows.innerHTML = items.map(([name, pct, g]) =>
+      `<tr><td>${name}</td><td class="num">${pct}</td><td class="num">${Math.round(g)}</td></tr>`
+    ).join("");
+    total.textContent = Math.round(items.reduce((s, i) => s + i[2], 0)) + " g";
+    document.getElementById("flour-out").textContent = f + " g";
+    document.getElementById("hyd-out").textContent = h + " %";
+  }
+
+  flour.addEventListener("input", render);
+  hydration.addEventListener("input", render);
+  render();
+</script>
+
+</body></html>
